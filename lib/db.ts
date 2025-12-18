@@ -4,7 +4,7 @@ import { Pool } from "pg"
 import bcrypt from "bcryptjs"
 
 /**
- * Postgres (Supabase) DB helper.
+ * Postgres (Neon/Supabase) DB helper.
  *
  * This project previously used SQLite. We keep the same exported helpers:
  *   - dbGet(sql, params)
@@ -14,11 +14,11 @@ import bcrypt from "bcryptjs"
  * so the rest of the code can stay almost unchanged.
  */
 
-const DATABASE_URL = process.env.DATABASE_URL || process.env.SUPABASE_DB_URL
+const DATABASE_URL = process.env.DATABASE_URL || process.env.SUPABASE_DB_URL || process.env.NEON_DATABASE_URL
 
 if (!DATABASE_URL) {
   throw new Error(
-    "Missing DATABASE_URL (or SUPABASE_DB_URL). Add it to .env.local from Supabase > Project Settings > Database."
+    "Missing DATABASE_URL. Use your Neon pooled connection string (or Supabase connection string) in .env.local."
   )
 }
 

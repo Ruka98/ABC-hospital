@@ -2,13 +2,16 @@
 
 A complete hospital management system built with **Next.js 16**, **Supabase Postgres**, and TypeScript.
 
-## Setup (Supabase)
+## Setup (Postgres via Neon or Supabase)
 
-1) Create a Supabase project.
-2) In Supabase Dashboard ➜ **SQL Editor**, run the file `supabase_schema.sql` from this repo. It creates all tables and seeds a default admin so you can log in immediately.
+1) Create a Neon (recommended for Vercel) or Supabase project.
+2) Run the SQL schema `supabase_schema.sql` (works for Neon too):
+   - **Neon**: Dashboard ➜ SQL Editor ➜ paste the file contents ➜ Run.
+   - **Supabase**: Dashboard ➜ SQL Editor ➜ New query ➜ paste the file contents ➜ Run.
+   This creates all tables and seeds a default admin so you can log in immediately.
 3) Copy `.env.local.example` to `.env.local` and fill in your keys:
-   - `DATABASE_URL` (Supabase connection string from Project Settings ➜ Database)
-   - (Optional) Storage settings (`NEXT_PUBLIC_SUPABASE_URL`, keys, bucket) if you want reports stored in Supabase Storage
+   - `DATABASE_URL` = **Neon pooled** connection string (Connection Details ➜ Connection Strings ➜ `Pooled` ➜ `psql/node`). Append `?sslmode=require` if not present.
+   - (Optional) Storage settings (`NEXT_PUBLIC_SUPABASE_URL`, keys, bucket) if you want reports stored in Supabase Storage.
    - No Supabase Auth setup is required; this app uses its own simple session cookies.
 
 ## Quick Start

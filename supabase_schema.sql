@@ -1,5 +1,5 @@
--- Supabase / Postgres schema for ABC Healthcare Group
--- Run this in Supabase Dashboard -> SQL Editor -> New query.
+-- Postgres schema for ABC Healthcare Group (works on Neon or Supabase)
+-- Run this in your Postgres provider's SQL editor (Neon: Dashboard -> SQL Editor; Supabase: Dashboard -> SQL Editor).
 
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 

@@ -29,7 +29,7 @@ export function LoginForm() {
       if (result?.error) {
         // Check if it's a database timeout/connection error
         if (result.error.includes("timeout") || result.error.toLowerCase().includes("database")) {
-          setError("Database connection failed. Confirm your Supabase DATABASE_URL and that the Supabase database is reachable.")
+          setError("Database connection failed. Confirm your Postgres DATABASE_URL (Neon pooled connection string) and that the database is reachable.")
         } else {
           setError(result.error)
         }
@@ -42,7 +42,7 @@ export function LoginForm() {
     } catch (err: any) {
       const errorMessage = err.message || "Failed to sign in"
       if (errorMessage.includes("timeout") || errorMessage.toLowerCase().includes("database")) {
-        setError("Database connection failed. Confirm your Supabase DATABASE_URL and that the Supabase database is reachable.")
+        setError("Database connection failed. Confirm your Postgres DATABASE_URL (Neon pooled connection string) and that the database is reachable.")
       } else {
         setError(errorMessage)
       }
