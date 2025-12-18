@@ -28,8 +28,8 @@ export function LoginForm() {
 
       if (result?.error) {
         // Check if it's a database timeout/connection error
-        if (result.error.includes("timeout") || result.error.includes("SQLite") || result.error.includes("Database connection failed")) {
-          setError("Database connection failed. SQLite does not work on Vercel. Please migrate to a cloud database (Vercel Postgres, Turso, etc.)")
+        if (result.error.includes("timeout") || result.error.toLowerCase().includes("database")) {
+          setError("Database connection failed. Confirm your Supabase DATABASE_URL and that the Supabase database is reachable.")
         } else {
           setError(result.error)
         }
@@ -41,8 +41,8 @@ export function LoginForm() {
       }
     } catch (err: any) {
       const errorMessage = err.message || "Failed to sign in"
-      if (errorMessage.includes("timeout") || errorMessage.includes("SQLite")) {
-        setError("Database connection failed. SQLite does not work on Vercel. Please migrate to a cloud database.")
+      if (errorMessage.includes("timeout") || errorMessage.toLowerCase().includes("database")) {
+        setError("Database connection failed. Confirm your Supabase DATABASE_URL and that the Supabase database is reachable.")
       } else {
         setError(errorMessage)
       }
