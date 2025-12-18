@@ -5,10 +5,11 @@ A complete hospital management system built with **Next.js 16**, **Supabase Post
 ## Setup (Supabase)
 
 1) Create a Supabase project.
-2) In Supabase Dashboard ➜ **SQL Editor**, run the file `supabase_schema.sql` from this repo.
+2) In Supabase Dashboard ➜ **SQL Editor**, run the file `supabase_schema.sql` from this repo. It creates all tables and seeds a default admin so you can log in immediately.
 3) Copy `.env.local.example` to `.env.local` and fill in your keys:
-   - `DATABASE_URL` (Supabase connection string)
-   - (Optional) Storage settings (`NEXT_PUBLIC_SUPABASE_URL`, keys, bucket)
+   - `DATABASE_URL` (Supabase connection string from Project Settings ➜ Database)
+   - (Optional) Storage settings (`NEXT_PUBLIC_SUPABASE_URL`, keys, bucket) if you want reports stored in Supabase Storage
+   - No Supabase Auth setup is required; this app uses its own simple session cookies.
 
 ## Quick Start
 
@@ -26,6 +27,8 @@ Visit `http://localhost:3000` to access the application.
 - **Password**: `admin123`
 
 **Important**: Change the default admin password after first login!
+
+Patient self-registration is disabled; administrators create patient logins from the admin panel.
 
 ## Features
 

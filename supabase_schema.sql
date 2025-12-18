@@ -107,3 +107,10 @@ CREATE INDEX IF NOT EXISTS idx_assignments_patient_id ON assignments(patient_id)
 CREATE INDEX IF NOT EXISTS idx_reports_patient_id ON reports(patient_id);
 CREATE INDEX IF NOT EXISTS idx_notifications_staff_id ON notifications(staff_id);
 CREATE INDEX IF NOT EXISTS idx_patient_notifications_patient_id ON patient_notifications(patient_id);
+
+-- Seed a default admin for first-time access (password: admin123)
+INSERT INTO staff (name, role, category, email, username, password_hash, phone, is_available)
+SELECT 'Administrator', 'admin', 'Management', 'admin@hospital.com', 'admin', crypt('admin123', gen_salt('bf', 10)), NULL, true
+WHERE NOT EXISTS (
+  SELECT 1 FROM staff WHERE username = 'admin'
+);

@@ -52,33 +52,7 @@ export async function signUp(
   gender?: string,
 ) {
   try {
-    if (role !== "patient") {
-      return { error: "Only patient registration is allowed" }
-    }
-
-    // Check if email already exists
-    const existingPatient = await dbGet("SELECT id FROM patients WHERE email = ?", [email]) as any
-    if (existingPatient) {
-      return { error: "Email already registered" }
-    }
-
-    // Check if username already exists (use email as username if not provided)
-    const username = email.split("@")[0]
-    const existingUsername = await dbGet("SELECT id FROM patients WHERE username = ?", [username]) as any
-    if (existingUsername) {
-      return { error: "Username already taken" }
-    }
-
-    const passwordHash = await hashPassword(password)
-
-    const result = await dbRun(`
-      INSERT INTO patients (name, email, username, password_hash, phone, dob, gender)
-      VALUES (?, ?, ?, ?, ?, ?, ?)
-    `, [name, email, username, passwordHash, phone || null, dob || null, gender || null])
-
-    await createSession(result.lastID.toString(), "patient")
-
-    return { success: true }
+    return { error: "Self-registration is disabled. Please contact an administrator." }
   } catch (error: any) {
     return { error: error.message || "Failed to register" }
   }

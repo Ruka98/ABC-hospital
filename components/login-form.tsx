@@ -85,12 +85,9 @@ export function LoginForm() {
           <Button type="submit" className="w-full" disabled={loading}>
             {loading ? "Signing in..." : "Sign In"}
           </Button>
-          <div className="text-center text-sm text-muted-foreground">
-            Don't have an account?{" "}
-            <Link href="/register" className="text-primary hover:underline">
-              Register as Patient
-            </Link>
-          </div>
+          <p className="text-center text-sm text-muted-foreground">
+            Patient accounts are created by hospital admin. Use the credentials provided to you.
+          </p>
         </form>
       </CardContent>
     </Card>

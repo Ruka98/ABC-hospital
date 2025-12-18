@@ -19,12 +19,10 @@ export default async function HomePage() {
           <Link href="/login">
             <Button size="lg">Sign In</Button>
           </Link>
-          <Link href="/register">
-            <Button size="lg" variant="outline">
-              Register as Patient
-            </Button>
-          </Link>
         </div>
+        <p className="text-sm text-gray-600">
+          Patient profiles are created by administrators. Please use the credentials they provide.
+        </p>
       </div>
     </div>
   )
