@@ -28,8 +28,8 @@ export function LoginForm() {
 
       if (result?.error) {
         // Check if it's a database timeout/connection error
-        if (result.error.includes("timeout") || result.error.includes("SQLite") || result.error.includes("Database connection failed")) {
-          setError("Database connection failed. SQLite does not work on Vercel. Please migrate to a cloud database (Vercel Postgres, Turso, etc.)")
+        if (result.error.includes("timeout") || result.error.toLowerCase().includes("database")) {
+          setError("Database connection failed. Confirm your Postgres DATABASE_URL (Neon pooled connection string) and that the database is reachable.")
         } else {
           setError(result.error)
         }
@@ -41,8 +41,8 @@ export function LoginForm() {
       }
     } catch (err: any) {
       const errorMessage = err.message || "Failed to sign in"
-      if (errorMessage.includes("timeout") || errorMessage.includes("SQLite")) {
-        setError("Database connection failed. SQLite does not work on Vercel. Please migrate to a cloud database.")
+      if (errorMessage.includes("timeout") || errorMessage.toLowerCase().includes("database")) {
+        setError("Database connection failed. Confirm your Postgres DATABASE_URL (Neon pooled connection string) and that the database is reachable.")
       } else {
         setError(errorMessage)
       }
@@ -85,12 +85,9 @@ export function LoginForm() {
           <Button type="submit" className="w-full" disabled={loading}>
             {loading ? "Signing in..." : "Sign In"}
           </Button>
-          <div className="text-center text-sm text-muted-foreground">
-            Don't have an account?{" "}
-            <Link href="/register" className="text-primary hover:underline">
-              Register as Patient
-            </Link>
-          </div>
+          <p className="text-center text-sm text-muted-foreground">
+            Patient accounts are created by hospital admin. Use the credentials provided to you.
+          </p>
         </form>
       </CardContent>
     </Card>
